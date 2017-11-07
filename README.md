@@ -1,5 +1,5 @@
 # dengxiangjun.github.io
-个人博客 https://dengxiangjun.github.io/
+[邓湘军的个人博客](https://dengxiangjun.github.io/) 
 ## 关于分支
 共有两个分支
 * hexo分支是博客源文件的存档,git push origin hexo可以提交到hexo分支
