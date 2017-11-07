@@ -118,3 +118,22 @@ deploy:
   type: git
   repository: https://github.com/dengxiangjun/dengxiangjun.github.io.git
   branch: master
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
