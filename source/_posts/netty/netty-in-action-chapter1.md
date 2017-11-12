@@ -61,7 +61,25 @@ Java对epoll进行了封装，叫做selector,单个线程监听多个socket的�
 ## netty的组成
 Channels，Callbacks，Futures，Events and handlers
 ### Channels
-Channels是一个开放的连接实体如硬件设备、文件、Socket或者是一个能执行IO操作的程序。
+Channels是一个开放的连接实体如硬件设备、文件、Socket或者是一个能执行IO操作的程序。比如对于一个socket程序，每一个tcp连接就是一个channel。又如打开一个文件，便有一个channel。
+![](/img/netty-in-action/1-3.png)
+下列代码展示了使用channel读取文件数据的例子
+```java
+    RandomAccessFile aFile = new RandomAccessFile("data/nio-data.txt", "rw");
+    FileChannel inChannel = aFile.getChannel();//一个文件对应一个channel
+    ByteBuffer buf = ByteBuffer.allocate(48);
+    int bytesRead = inChannel.read(buf);//从通道中读入数据到缓冲区，缓冲区为写模式
+    while (bytesRead != -1) {
+        System.out.println("Read " + bytesRead);
+        buf.flip();//缓冲区转换为读模式
+        while(buf.hasRemaining()){
+            System.out.print((char) buf.get());
+        }
+    buf.clear();
+    bytesRead = inChannel.read(buf);//继续读入数据
+    }
+    aFile.close();
+```
 ### Callbacks
 当回调被触发时
 事件可以通过接口实现channelhandler处理,下面展示了一个回调的例子
