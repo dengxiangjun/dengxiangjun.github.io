@@ -13,7 +13,7 @@ The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4.
 Your algorithm should run in O(n2) complexity.
 
 Follow up: Could you improve it to O(n log n) time complexity?
-## 递归
+## 递归， O（2^n）
 有一个上升序列，针对每一个数字。要么它加入到上升子序列中（如果要加入明它大于之前的上升序列的最后一个值），要么不加入到上升子序列中。我们取这两种情况的最大值。
 ```java
     public static int lengthOfLIS(int[] a) {
