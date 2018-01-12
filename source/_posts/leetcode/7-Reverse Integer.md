@@ -2,7 +2,7 @@
 title: 7. Reverse Integer
 tags:
     - leetcode 
-    - 简单题
+    - 边界题
 ---
 Given a 32-bit signed integer, reverse digits of an integer.
 
