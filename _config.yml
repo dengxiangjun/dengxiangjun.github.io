@@ -116,7 +116,7 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/dengxiangjun/dengxiangjun.github.io.git
+  repository: git@github.com:dengxiangjun/dengxiangjun.github.io.git
   branch: master
 
 jsonContent:
