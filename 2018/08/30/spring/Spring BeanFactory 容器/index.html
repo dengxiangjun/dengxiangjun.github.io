@@ -20,7 +20,8 @@
 <meta property="og:image" content="http://yoursite.com/img/spring/2.png">
 <meta property="og:image" content="http://yoursite.com/img/spring/3.png">
 <meta property="og:image" content="http://yoursite.com/img/spring/4.png">
-<meta property="og:updated_time" content="2018-08-30T10:42:07.606Z">
+<meta property="og:image" content="http://yoursite.com/img/spring/5.png">
+<meta property="og:updated_time" content="2018-08-30T10:45:26.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring BeanFactory 容器">
 <meta name="twitter:description" content="Spring依赖注入Spring的一个核心概念就是控制反转，也叫依赖注入，也就是Bean的实例化交给Spring的Bean容器去做 示例使用Spring容器初始化一个对象，并调用对象里面的方法 JavaBean123456789101112131415public class Student &amp;#123;    private String studentName;    public Strin">
@@ -185,7 +186,11 @@
 <h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p>读取配置文件spring-context.xml的内容，解析bean标签，在调用beanFactory.getBean方法的时候，使用反射机制实例化对象</p>
 <h2 id="源码剖析"><a href="#源码剖析" class="headerlink" title="源码剖析"></a>源码剖析</h2><p>要通过配置文件的方式创建Bean，需要读取xml文件，并解析xml中的bean标签，然后再通过解析后的结果生成一个对象。<br>首先，看代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BeanFactory bf = <span class="keyword">new</span> XmlBeanFactory(<span class="keyword">new</span> ClassPathResource(<span class="string">"beanEvents.xml"</span>));</span><br></pre></td></tr></table></figure></p>
 <p>代码时序图如下<br><img src="/img/spring/1.jpg" alt=""><br>通过new ClassPathResource对象来构造Resource对象，后续通过Resource对象来初始化BeanFactory,new ClassPathResource对象时配置好路径和类加载器，这样可让后续XmlBeanFactory实例化的时候通过输入流读取xml文件，这里使用的类加载器是AppClassLoader。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassPathResource</span><span class="params">(String path, ClassLoader classLoader)</span> </span>&#123;</span><br><span class="line">	Assert.notNull(path, <span class="string">"Path must not be null"</span>);</span><br><span class="line">	String pathToUse = StringUtils.cleanPath(path);</span><br><span class="line">	<span class="keyword">if</span> (pathToUse.startsWith(<span class="string">"/"</span>)) &#123;</span><br><span class="line">		pathToUse = pathToUse.substring(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.path = pathToUse;</span><br><span class="line">	<span class="keyword">this</span>.classLoader = (classLoader != <span class="keyword">null</span> ? classLoader : ClassUtils.getDefaultClassLoader());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>XmlBeanFactory中有个成员变量XmlBeanDefinitionReader，这个reader负责读取xml文件，如图<img src="/img/spring/2.png" alt=""><br><img src="/img/spring/3.png" alt=""><br><img src="/img/spring/4.png" alt=""><br>解析完后，beanFactory的成员变量beanDefinitionMap会存储解析的bean标签，在后续调用beanFactory的getBean方法时，就能从工厂去取bean（如果工厂里没有实例化，则会进行实例化）。</p>
+<p>XmlBeanFactory中有个成员变量XmlBeanDefinitionReader，这个reader负责读取xml文件，如图<img src="/img/spring/2.png" alt="2"></p>
+<p><img src="/img/spring/3.png" alt="3"></p>
+<p><img src="/img/spring/4.png" alt="4"></p>
+<p>解析完后，beanFactory的成员变量beanDefinitionMap会存储解析的bean标签，如图5在后续调用beanFactory的getBean方法时，就能从工厂去取bean（如果工厂里没有实例化，则会进行实例化）。<br><img src="/img/spring/5.png" alt="5"></p>
+<p>在这个示例中，因为默认使用懒加载，那么第一次调用beanFactory的getBean会实例化bean。</p>
 
       
 
@@ -427,15 +432,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回溯</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
               </li>
              
               <li class="article-tag-list-item">
